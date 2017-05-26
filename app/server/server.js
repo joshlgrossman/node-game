@@ -1,3 +1,4 @@
+// @flow
 global.Promise = require('bluebird');
 global._ = require('lodash');
 
@@ -5,7 +6,8 @@ const path = require('path');
 const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
-const config = require('../server.config');
+
+const config = require('../../server.config');
 
 const router = express();
 router.use('/', express.static(path.join(__dirname, '../client/build')));

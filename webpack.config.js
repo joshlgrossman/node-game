@@ -14,9 +14,12 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
         include: [
-          path.resolve(__dirname, 'app/client/src')
+          path.resolve(__dirname, 'app/')
+        ],
+        exclude: [
+          /(node_modules|bower_components)/,
+          path.resolve(__dirname,'app/server/')
         ],
         use: {
           loader: 'babel-loader',
@@ -29,9 +32,6 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false }
-    }),
     new HtmlWebpackPlugin({
       title: 'Game'
     })
