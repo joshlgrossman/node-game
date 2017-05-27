@@ -10,7 +10,9 @@ module.exports = function(socket){
 
   const engine = new Engine(canvas);
   const player = new Player(engine);
-  const input = new Input(window).route(engine);
+  const input = new Input(window);
+
+  engine.listen(input).route(socket);
 
   engine.add(player);
   engine.run();

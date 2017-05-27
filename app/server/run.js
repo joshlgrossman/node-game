@@ -6,7 +6,9 @@ module.exports = function(io){
 
   const engine = new Engine();
   const player = new Player(engine);
-  const socket = new Socket(io).route(engine);
+  const socket = new Socket(io);
+
+  engine.listen(socket);
 
   engine.add(player);
   engine.run();
