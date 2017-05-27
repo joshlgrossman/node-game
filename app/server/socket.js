@@ -1,16 +1,24 @@
-function socket(io){
+const IO = require('../game/IO');
+const Event = require('../game/Event');
 
-  this.on('update', ({x,y}) => {
-    const d = Math.sqrt(x*x+y*y);
-    if(d > 20){
-      x*=20/d;
-      y*=20/d;
-    }
-    this.emit('response', {x,y});
-  });
+class Socket extends IO {
+
+  initalize(io){
+
+    io.on(Event.CONNECT, socket => {
+
+      socket.on(Event.MOUSE, me => {
+        this.emit(Event.MOUSE, me);
+      });
+
+      socket.on(Event.KEY, ke => {
+        this.emit(Event.KEY, ke);
+      })
+
+    });
+
+  }
 
 }
 
-module.exports.listen = io => {
-  io.on('connect', s => socket.bind(s, io)());
-}
+module.exports = Socket;

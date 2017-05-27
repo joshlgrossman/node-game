@@ -7,7 +7,7 @@ const express = require('express');
 const socketio = require('socket.io');
 
 const config = require('../../server.config');
-const socket = require('./socket');
+const run = require('./run');
 
 const router = express();
 router.use('/', express.static(path.join(__dirname, '../build')));
@@ -15,5 +15,7 @@ router.use('/', express.static(path.join(__dirname, '../build')));
 const server = http.createServer(router);
 const io = socketio(server);
 
-socket.listen(io);
-server.listen(config.port, config.on.start);
+server.listen(config.port, () => {
+  console.log(`Server started on port ${config.port}`);
+  run();
+});
