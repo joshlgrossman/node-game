@@ -1,6 +1,7 @@
 class Engine {
 
   constructor(canvas){
+    this.trace = console.log;
     this.canvas = canvas;
     this.gfx = canvas && this.canvas.getContext('2d');
     this.objects = [];
