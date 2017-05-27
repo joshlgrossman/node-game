@@ -8,6 +8,7 @@ class Player {
   }
 
   update(){
+    this.vel = this.vel.multiply(0.9);
     this.pos = this.pos.add(this.vel);
   }
 

@@ -10,7 +10,7 @@ const config = require('../../server.config');
 const socket = require('./socket');
 
 const router = express();
-router.use('/', express.static(path.join(__dirname, '../client/build')));
+router.use('/', express.static(path.join(__dirname, '../build')));
 
 const server = http.createServer(router);
 const io = socketio(server);
