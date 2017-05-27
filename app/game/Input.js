@@ -1,7 +1,0 @@
-class Input {
-
-  listen(source){
-
-  }
-
-}

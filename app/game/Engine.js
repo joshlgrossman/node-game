@@ -1,10 +1,14 @@
+const Event = require('./Event');
+
 class Engine {
 
   constructor(canvas){
-    this.trace = console.log;
+    this.trace = (...data) => data.forEach(console.log);
     this.canvas = canvas;
     this.gfx = canvas && this.canvas.getContext('2d');
     this.objects = [];
+    this.mouse = {};
+    this.keys = [];
   }
 
   update(){
@@ -24,6 +28,11 @@ class Engine {
 
   add(obj){
     this.objects.push(obj);
+  }
+
+  on(evt, data){
+    if(evt === Event.MOUSE) this.mouse = data;
+    else if(evt === Event.KEY) this.keys[data.which] = data.down;
   }
 
 }
