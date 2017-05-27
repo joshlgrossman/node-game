@@ -2,6 +2,7 @@ class IO {
 
   constructor(src){
     this.routes = [];
+    this.listeners = [];
     this.initialize(src);
   }
 
@@ -10,8 +11,13 @@ class IO {
     return this;
   }
 
+  addListener(listener){
+    this.listeners.push(listener);
+  }
+
   emit(evt, data){
-    this.routes.forEach(route => route.on && route.on(evt, data));
+    this.listeners.forEach(listener => listener.on(evt, data));
+    this.routes.forEach(route => route.emit(evt,data));
     return this;
   }
 
