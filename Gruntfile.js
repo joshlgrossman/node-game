@@ -1,8 +1,19 @@
 module.exports = function(grunt) {
   grunt.initConfig({
 
+    pkg: grunt.file.readJSON('package.json'),
+
+    eslint: {
+      options: {
+        configFile: 'eslint.json',
+        reset: true
+      },
+
+      build: ['app/client/src/*.js', 'app/client/game/*.js', 'app/server/**/*.js']
+    },
+
 		browserify: {
-			js: {
+			build: {
 				src: 'app/client/src/client.js',
 				dest: 'app/client/build/client.js',
 				options: {
@@ -16,7 +27,7 @@ module.exports = function(grunt) {
 		},
 
 		uglify: {
-			my_target: {
+			build: {
 				files: {
 					'app/client/build/client.min.js': ['app/client/build/client.js']
 				}
@@ -24,7 +35,7 @@ module.exports = function(grunt) {
 		},
 
     htmlmin: {
-      dist: {
+      build: {
         options: {
           removeComments: true,
           collapseWhitespace: true
@@ -40,7 +51,9 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-browserify');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
+  grunt.loadNpmTasks('grunt-eslint');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
-	grunt.registerTask('default', ['browserify', 'uglify', 'htmlmin']);
+	grunt.registerTask('default', ['eslint', 'browserify', 'uglify', 'htmlmin']);
 
 };
