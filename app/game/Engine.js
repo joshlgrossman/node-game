@@ -10,6 +10,15 @@ class Engine {
     this.mouse = {};
     this.keys = [];
     this.io = null;
+    this.time = {
+      current: new Date().getTime(),
+      previous: 0,
+      delta: 0
+    }
+  }
+
+  get delta(){
+    return this.time.delta/1000;
   }
 
   update(){
@@ -22,16 +31,22 @@ class Engine {
   }
 
   run(){
+    this.time.previous = this.time.current;
+    this.time.current = new Date().getTime();
+    this.time.delta = this.time.current - this.time.previous;
     this.update();
     if(this.gfx){
       this.render();
       requestAnimationFrame(this.run.bind(this));
+    } else {
+      setTimeout(this.run.bind(this), 50);
     }
-    else setInterval(this.update.bind(this), 20);
+    return this;
   }
 
-  add(obj){
-    this.objects.push(obj);
+  add(...objs){
+    objs.forEach(obj => this.objects.push(obj));
+    return this;
   }
 
   listen(io){
@@ -43,10 +58,11 @@ class Engine {
   on(evt, data){
     if(evt === Event.MOUSE) this.mouse = data;
     else if(evt === Event.KEY) this.keys[data.which] = data.down;
+    return this;
   }
 
   resolve(engine){
-    
+    return this;
   }
 
 }

@@ -15,7 +15,7 @@ class Vector {
     return new Vector(that.x + this.x, that.y + this.y);
   }
 
-  multiply(k){
+  scale(k){
     return new Vector(k * this.x, k * this.y);
   }
 

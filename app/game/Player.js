@@ -12,18 +12,18 @@ class Player extends Entity {
 
   update(){
     if(this.engine.keys[65]){
-      this.vel.x = -3;
+      this.vel.x = -100;
     } else if(this.engine.keys[68]){
-      this.vel.x = 3;
+      this.vel.x = 100;
     }
     if(this.engine.keys[87]){
-      this.vel.y = -3;
+      this.vel.y = -100;
     } else if(this.engine.keys[83]){
-      this.vel.y = 3;
+      this.vel.y = 100;
     }
 
-    this.pos = this.pos.add(this.vel);
-    this.vel = this.vel.multiply(0.9);
+    this.pos = this.pos.add(this.vel.scale(this.engine.delta));
+    this.vel = this.vel.scale(0.9);
   }
 
   render(gfx){
