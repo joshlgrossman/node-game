@@ -3,7 +3,7 @@ const Event = require('../game/Event');
 
 class Socket extends IO {
 
-  initalize(io){
+  initialize(io){
 
     io.on(Event.CONNECT, socket => {
 
@@ -13,7 +13,7 @@ class Socket extends IO {
 
       socket.on(Event.KEY, ke => {
         this.emit(Event.KEY, ke);
-      })
+      });
 
     });
 

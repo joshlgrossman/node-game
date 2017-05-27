@@ -17,5 +17,5 @@ const io = socketio(server);
 
 server.listen(config.port, () => {
   console.log(`Server started on port ${config.port}`);
-  run();
+  run(io);
 });
