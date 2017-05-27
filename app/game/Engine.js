@@ -9,6 +9,7 @@ class Engine {
     this.objects = [];
     this.mouse = {};
     this.keys = [];
+    this.io = null;
   }
 
   update(){
@@ -22,17 +23,30 @@ class Engine {
 
   run(){
     this.update();
-    this.gfx && this.render();
-    requestAnimationFrame(this.run.bind(this));
+    if(this.gfx){
+      this.render();
+      requestAnimationFrame(this.run.bind(this));
+    }
+    else setInterval(this.update.bind(this), 20);
   }
 
   add(obj){
     this.objects.push(obj);
   }
 
+  listen(io){
+    this.io = io;
+    io.listeners.push(this);
+    return io;
+  }
+
   on(evt, data){
     if(evt === Event.MOUSE) this.mouse = data;
     else if(evt === Event.KEY) this.keys[data.which] = data.down;
+  }
+
+  resolve(engine){
+    
   }
 
 }

@@ -1,4 +1,3 @@
-const Event = require('./Event');
 const v = require('./v');
 
 const Entity = require('./Entity');
