@@ -4,7 +4,7 @@ class Player {
 
   constructor(){
     this.pos = v(100,100);
-    this.vel = v(0,0.5);
+    this.vel = v(0,0);
   }
 
   update(){
