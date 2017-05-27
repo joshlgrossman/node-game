@@ -2,13 +2,12 @@
   "name": "node-game",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app/server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "flow": "flow"
+    "start": "node app/server/server"
   },
   "keywords": [],
-  "author": "",
+  "author": "Josh",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.24.1",
