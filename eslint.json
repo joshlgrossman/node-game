@@ -17,13 +17,19 @@
     "no-use-before-define": 2,
     "no-dupe-args": 2,
     "no-dupe-keys": 2,
+    "no-duplicate-case": 2,
     "no-unreachable": 2,
     "no-self-assign": 2,
+    "no-redeclare": 2,
+    "no-this-before-super": 2,
 
     "no-template-curly-in-string": 1,
     "no-unused-vars": 1,
     "no-var": 1,
-    "prefer-const": 1
+    "prefer-const": 1,
+    "eqeqeq": 1,
+    "no-floating-decimal": 1,
+    "no-unmodified-loop-condition": 1
   }
 
 }
