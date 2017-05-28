@@ -12,10 +12,6 @@ class IO {
     return this;
   }
 
-  addListener(listener){
-    this.listeners.push(listener);
-  }
-
   emit(evt, data){
     this.listeners.forEach(listener => listener.on(evt, data));
     this.routes.forEach(route => route.emit(evt,data));
