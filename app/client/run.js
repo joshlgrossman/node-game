@@ -19,6 +19,7 @@ module.exports = function(socket){
   });
 
   socket.on(Event.UPDATE, objects => {
+    console.log(objects);
     engine.merge(objects);
   });
 

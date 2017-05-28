@@ -15,7 +15,7 @@ module.exports = function(io){
   });
 
   setInterval(() => {
-    io.emit(Event.UPDATE, engine.objects);
-  }, 1000);
+    io.emit(Event.UPDATE, engine.serialize());
+  }, 40);
 
 };
