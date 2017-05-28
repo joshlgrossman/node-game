@@ -1,6 +1,6 @@
 const io = require('socket.io-client');
-const run = require('./run');
+const game = require('./game');
 
 window.addEventListener('load', () => {
-  run(io());
+  game(io());
 });
