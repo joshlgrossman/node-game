@@ -11,15 +11,19 @@ module.exports = function(socket){
 
   const engine = new Engine(canvas).run();
 
-  socket.on(Event.CONNECT, () => {
+  function connect(){
     const player = new Player(socket.id);
     const input = new Input(window);
     player.listen(input).route(socket);
     engine.add(player)
-  });
+  }
 
-  socket.on(Event.UPDATE, state => {
+  function update(state){
     engine.merge(state);
-  });
+    engine.refresh();
+  }
+
+  socket.on(Event.CONNECT, connect);
+  socket.on(Event.UPDATE, update);
 
 };

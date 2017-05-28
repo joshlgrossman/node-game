@@ -7,15 +7,19 @@ module.exports = function(io){
 
   const engine = new Engine().run();
 
-  io.on(Event.CONNECT, sckt => {
+  function connect(sckt){
     const player = new Player(sckt.id);
     const socket = new Socket(sckt);
     player.listen(socket);
     engine.add(player);
-  });
+  }
 
-  setInterval(() => {
+  function update(){
     io.emit(Event.UPDATE, engine.serialize());
-  }, 40);
+    engine.refresh();
+  }
+
+  io.on(Event.CONNECT, connect);
+  setInterval(update, 40);
 
 };
