@@ -1,6 +1,3 @@
-global.Promise = require('bluebird');
-global._ = require('lodash');
-
 const path = require('path');
 const http = require('http');
 const express = require('express');

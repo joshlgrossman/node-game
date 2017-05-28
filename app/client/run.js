@@ -18,9 +18,8 @@ module.exports = function(socket){
     engine.add(player)
   });
 
-  socket.on(Event.UPDATE, objects => {
-    console.log(objects);
-    engine.merge(objects);
+  socket.on(Event.UPDATE, state => {
+    engine.merge(state);
   });
 
 };
