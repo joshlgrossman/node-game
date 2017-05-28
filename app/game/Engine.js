@@ -1,3 +1,5 @@
+const Puppet = require('./Puppet');
+
 class Engine {
 
   constructor(canvas){
@@ -54,17 +56,27 @@ class Engine {
   }
 
   merge(state){
-    for(const id in state) this.objects[id].merge(state[id]);
+    for(const id in state) {
+      if(id in this.objects){
+        this.objects[id].merge(state[id]);
+      } else {
+        const puppet = new Puppet(id);
+        this.add(puppet);
+      }
+    }
     return this;
   }
 
   serialize(){
     const state = {};
+    let stale = false;
     for(const id in this.objects) {
-      if(this.objects[id].stale)
+      if(this.objects[id].stale){
+        stale = true;
         state[id] = this.objects[id].serialize();
+      }
     }
-    return state;
+    return stale ? state : null;
   }
 
   refresh(){

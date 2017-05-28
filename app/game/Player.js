@@ -8,7 +8,6 @@ class Player extends Listenable(Entity) {
     this.id = id;
     this.speed = 100;
     this.speedSq = this.speed**2;
-    this.friction = this.speed*2.5;
   }
 
   update(delta){
@@ -27,16 +26,8 @@ class Player extends Listenable(Entity) {
       this.vel.length = this.speed;
     }
 
-    this.pos = this.pos.add(this.vel.scale(delta));
-    if(this.vel.lengthSq > 0){
-      const vel = this.vel.length - this.friction * delta;
-      this.vel.length = vel < 0 ? 0 : vel;
-    }
-  }
-
-  render(gfx){
-    gfx.fillStyle = 'red';
-    gfx.fillRect(this.pos.x - 5, this.pos.y - 5, 10, 10);
+    if(this.vel.lengthSq > 0) this.stale = true;
+    this.move(delta);
   }
 
 }
