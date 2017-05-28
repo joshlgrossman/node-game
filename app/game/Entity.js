@@ -20,6 +20,14 @@ class Entity {
     this.rot = entity.rot;
   }
 
+  serialize(){
+    return {
+      pos: this.pos.serialize(),
+      vel: this.vel.serialize(),
+      rot: this.rot
+    }
+  }
+
 }
 
 module.exports = Entity;

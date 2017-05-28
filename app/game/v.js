@@ -31,6 +31,10 @@ class Vector {
     return new Vector(this);
   }
 
+  serialize(){
+    return {x: this.x, y: this.y};
+  }
+
 }
 
 module.exports = (x,y) => new Vector(x,y);

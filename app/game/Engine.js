@@ -62,6 +62,12 @@ class Engine {
     return this;
   }
 
+  serialize(){
+    const objs = {};
+    for(const id in this.objects) objs[id] = this.objects[id].serialize();
+    return objs;
+  }
+
 }
 
 module.exports = Engine;
