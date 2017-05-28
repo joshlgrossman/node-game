@@ -12,12 +12,8 @@ class Engine {
     }
   }
 
-  get delta(){
-    return this.time.delta/1000;
-  }
-
   update(){
-    for(const id in this.objects) this.objects[id].update(this.delta);
+    for(const id in this.objects) this.objects[id].update(this.time.delta);
   }
 
   render(){
@@ -28,7 +24,7 @@ class Engine {
   run(){
     this.time.previous = this.time.current;
     this.time.current = new Date().getTime();
-    this.time.delta = this.time.current - this.time.previous;
+    this.time.delta = (this.time.current - this.time.previous)/1000;
     this.update();
     if(this.gfx){
       this.render();
@@ -57,15 +53,15 @@ class Engine {
     return this;
   }
 
-  merge(objs){
-    for(const id in objs) this.objects[id].merge(objs[id]);
+  merge(state){
+    for(const id in state) this.objects[id].merge(state[id]);
     return this;
   }
 
   serialize(){
-    const objs = {};
-    for(const id in this.objects) objs[id] = this.objects[id].serialize();
-    return objs;
+    const state = {};
+    for(const id in this.objects) state[id] = this.objects[id].serialize();
+    return state;
   }
 
 }

@@ -1,9 +1,10 @@
-const v = require('./v');
+const v = require('./Vector').factory;
 
 class Entity {
 
   constructor(){
     this.engine = null;
+    this.smoothing = 0.75;
     this.pos = v(100,100);
     this.vel = v(0,0);
     this.rot = 0;
@@ -15,9 +16,9 @@ class Entity {
   }
 
   merge(entity){
-    this.pos = v(entity.pos);
-    this.vel = v(entity.vel);
-    this.rot = entity.rot;
+    this.pos = this.pos.avg(0.75, entity.pos);
+    this.vel = this.vel.avg(0.75, entity.vel);
+    this.rot = this.rot * 0.25 + entity.rot * 0.75;
   }
 
   serialize(){
