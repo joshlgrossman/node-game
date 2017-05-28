@@ -1,11 +1,10 @@
-const Entity = require('./Entity');
+const Puppet = require('./Puppet');
 const Listenable = require('./Listenable');
 
-class Player extends Listenable(Entity) {
+class Player extends Listenable(Puppet) {
 
   constructor(id){
-    super();
-    this.id = id;
+    super(id);
     this.speed = 100;
     this.speedSq = this.speed**2;
   }
@@ -22,11 +21,10 @@ class Player extends Listenable(Entity) {
       this.vel.y = this.speed;
     }
 
-    if(this.vel.lengthSq > this.speedSq){
+    if(this.vel.lengthSq > this.speedSq)
       this.vel.length = this.speed;
-    }
 
-    if(this.vel.lengthSq > 0) this.stale = true;
+    this.stale = this.vel.lengthSq > 0;
     this.move(delta);
   }
 
