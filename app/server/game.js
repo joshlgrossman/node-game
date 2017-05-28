@@ -5,7 +5,7 @@ const Socket = require('./Socket');
 
 module.exports = function(io){
 
-  const engine = new Engine().run();
+  const engine = new Engine();
 
   function connect(sckt){
     const player = new Player(sckt.id);
@@ -22,7 +22,12 @@ module.exports = function(io){
     }
   }
 
+  function run(){
+    engine.update();
+    update();
+  }
+
   io.on(Event.CONNECT, connect);
-  setInterval(update, 30);
+  setInterval(run, 40);
 
 };

@@ -9,7 +9,7 @@ module.exports = function(socket){
   canvas.width = 1024;
   canvas.height = canvas.width * window.innerHeight / window.innerWidth;
 
-  const engine = new Engine(canvas).run();
+  const engine = new Engine(canvas);
 
   function connect(){
     const player = new Player(socket.id);
@@ -23,7 +23,15 @@ module.exports = function(socket){
     engine.refresh();
   }
 
+  function run(){
+    engine.update();
+    engine.render();
+    requestAnimationFrame(run);
+  }
+
   socket.on(Event.CONNECT, connect);
   socket.on(Event.UPDATE, update);
+
+  requestAnimationFrame(run);
 
 };
