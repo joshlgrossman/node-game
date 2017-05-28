@@ -60,8 +60,16 @@ class Engine {
 
   serialize(){
     const state = {};
-    for(const id in this.objects) state[id] = this.objects[id].serialize();
+    for(const id in this.objects) {
+      if(this.objects[id].stale)
+        state[id] = this.objects[id].serialize();
+    }
     return state;
+  }
+
+  refresh(){
+    for(const id in this.objects) this.objects[id].stale = false;
+    return this;
   }
 
 }

@@ -6,6 +6,7 @@ const Listenable = Base => class extends Base {
     super(...args);
     this.keys = [];
     this.mouse = {};
+    this.stale = false;
   }
 
   listen(io){
@@ -19,6 +20,7 @@ const Listenable = Base => class extends Base {
     if(evt === Event.MOUSE) this.mouse = data;
     else if(evt === Event.KEY) this.keys[data.which] = data.down;
     else if(evt === Event.DISCONNECT) this.remove();
+    this.stale = true;
     return this;
   }
 
