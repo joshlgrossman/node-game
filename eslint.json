@@ -6,6 +6,11 @@
     "node": true
   },
 
+  "parserOptions": {
+    "ecmaVersion": 2016,
+    "sourceType": "module"
+  },
+
   "rules": {
     "no-const-assign": 2,
     "no-undef": 2,
