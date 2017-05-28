@@ -1,28 +1,26 @@
-const v = require('./v');
-
 const Entity = require('./Entity');
+const Listenable = require('./Listenable');
 
-class Player extends Entity {
+class Player extends Listenable(Entity) {
 
-  constructor(engine){
-    super(engine);
-    this.pos = v(100,100);
-    this.vel = v(0,0);
+  constructor(id){
+    super();
+    this.id = id;
   }
 
-  update(){
-    if(this.engine.keys[65]){
+  update(delta){
+    if(this.keys[65]){
       this.vel.x = -100;
-    } else if(this.engine.keys[68]){
+    } else if(this.keys[68]){
       this.vel.x = 100;
     }
-    if(this.engine.keys[87]){
+    if(this.keys[87]){
       this.vel.y = -100;
-    } else if(this.engine.keys[83]){
+    } else if(this.keys[83]){
       this.vel.y = 100;
     }
 
-    this.pos = this.pos.add(this.vel.scale(this.engine.delta));
+    this.pos = this.pos.add(this.vel.scale(delta));
     this.vel = this.vel.scale(0.9);
   }
 

@@ -1,6 +1,9 @@
 const Event = {
 
   CONNECT: 'connect',
+  DISCONNECT: 'disconnect',
+
+  UPDATE: 'update',
 
   MOUSE: 'mouse',
   KEY: 'key',

@@ -3,6 +3,7 @@ class IO {
   constructor(src){
     this.routes = [];
     this.listeners = [];
+    this.engine = null;
     this.initialize(src);
   }
 
@@ -21,7 +22,7 @@ class IO {
     return this;
   }
 
-  initialize(src){}
+  initialize(){}
 
 }
 
