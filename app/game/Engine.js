@@ -7,34 +7,20 @@ class Engine {
     this.canvas = canvas;
     this.gfx = canvas && this.canvas.getContext('2d');
     this.objects = [];
-    this.time = {
-      current: new Date().getTime(),
-      previous: 0,
-      delta: 0
-    }
+    this.time = new Date().getTime();
+    this.delta = 0;
   }
 
   update(){
-    for(const id in this.objects) this.objects[id].update(this.time.delta);
+    const time = new Date().getTime();
+    this.delta = (time - this.time)/1000;
+    this.time = time;
+    for(const id in this.objects) this.objects[id].update(this.delta);
   }
 
   render(){
     this.gfx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     for(const id in this.objects) this.objects[id].render(this.gfx);
-  }
-
-  run(){
-    this.time.previous = this.time.current;
-    this.time.current = new Date().getTime();
-    this.time.delta = (this.time.current - this.time.previous)/1000;
-    this.update();
-    if(this.gfx){
-      this.render();
-      requestAnimationFrame(this.run.bind(this));
-    } else {
-      setTimeout(this.run.bind(this), 50);
-    }
-    return this;
   }
 
   add(...objs){
