@@ -6,9 +6,12 @@ class Player extends Listenable(Puppet) {
 
   constructor(id){
     super(id);
-    this.speed = 100;
+    this.speed = 200;
     this.speedSq = this.speed**2;
+    this.previousMouse = {};
   }
+
+  shoot(){}
 
   update(delta){
     if(this.keys[65]){
@@ -25,11 +28,15 @@ class Player extends Listenable(Puppet) {
     if(this.vel.lengthSq > this.speedSq)
       this.vel.length = this.speed;
 
+    if(this.mouse.down && !this.previousMouse.down)
+      this.shoot();
+
     const prevRot = this.rot;
     this.rot = v(this.mouse.pos).sub(this.pos).angle;
 
     this.stale = this.stale || (prevRot - this.rot) || this.vel.lengthSq > 0;
     this.move(delta);
+    this.previousMouse = this.mouse;
   }
 
 }
