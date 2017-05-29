@@ -2,13 +2,14 @@ const v = require('./Vector').factory;
 
 class Entity {
 
-  constructor(){
+  constructor(type = 'entity'){
     this.engine = null;
     this.smoothing = 0.75;
     this.pos = v(100,100);
     this.vel = v(0,0);
     this.rot = 0;
     this.friction = 250;
+    this.type = type;
   }
 
   remove(){

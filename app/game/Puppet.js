@@ -16,14 +16,15 @@ class Puppet extends Entity {
   }
 
   constructor(id){
-    super();
+    super('player');
     this.id = id;
     this.color = Puppet.randomColor();
+    this.radius = 15;
   }
 
   render(gfx){
-    const lx = Math.cos(this.rot) * 30;
-    const ly = Math.sin(this.rot) * 30;
+    const lx = Math.cos(this.rot) * (this.radius + 10);
+    const ly = Math.sin(this.rot) * (this.radius + 10);
 
     gfx.lineWidth = 4;
     gfx.strokeStyle = '#555';
@@ -35,7 +36,7 @@ class Puppet extends Entity {
     gfx.fillStyle = this.color.light;
     gfx.strokeStyle = this.color.dark;
     gfx.beginPath();
-    gfx.arc(this.pos.x, this.pos.y, 20, 0, 6.2832);
+    gfx.arc(this.pos.x, this.pos.y, this.radius, 0, 6.2832);
     gfx.stroke();
     gfx.fill();
   }
