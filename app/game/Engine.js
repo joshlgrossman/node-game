@@ -35,7 +35,7 @@ class Engine {
   remove(...objs){
     objs.forEach(obj => {
       if(obj.id) delete this.objects[obj.id];
-      else this.objects.splice(this.objects.indexOf(obj), 1)
+      else this.objects.splice(this.objects.indexOf(obj), 1);
       obj.engine = null;
     });
     return this;
