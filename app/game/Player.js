@@ -1,3 +1,4 @@
+const v = require('./Vector').factory;
 const Puppet = require('./Puppet');
 const Listenable = require('./Listenable');
 
@@ -24,7 +25,10 @@ class Player extends Listenable(Puppet) {
     if(this.vel.lengthSq > this.speedSq)
       this.vel.length = this.speed;
 
-    this.stale = this.vel.lengthSq > 0;
+    const prevRot = this.rot;
+    this.rot = v(this.mouse.pos).sub(this.pos).angle;
+
+    this.stale = this.stale || (prevRot - this.rot) || this.vel.lengthSq > 0;
     this.move(delta);
   }
 

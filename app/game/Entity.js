@@ -19,7 +19,7 @@ class Entity {
   merge(entity){
     this.pos = this.pos.avg(0.75, entity.pos);
     this.vel = this.vel.avg(0.75, entity.vel);
-    this.rot = this.rot * 0.25 + entity.rot * 0.75;
+    this.rot = entity.rot;
   }
 
   serialize(){
