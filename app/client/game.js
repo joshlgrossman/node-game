@@ -9,11 +9,16 @@ module.exports = function(socket){
   canvas.width = 1024;
   canvas.height = canvas.width * window.innerHeight / window.innerWidth;
 
+  const scale = {
+    x: canvas.width / window.innerWidth,
+    y: canvas.height / window.innerHeight
+  };
+
   const engine = new Engine(canvas);
 
   function connect(){
     const player = new Player(socket.id);
-    const input = new Input(window);
+    const input = new Input(window,scale);
     player.listen(input).route(socket);
     engine.add(player)
   }

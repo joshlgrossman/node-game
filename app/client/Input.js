@@ -3,19 +3,20 @@ const Event = require('../game/Event');
 
 class Input extends IO {
 
+  constructor(src, {x=1, y=1}){
+    super(src);
+    this.scl = {x,y};
+  }
+
   initialize(wndw){
     let mouseDown = false;
-    const center = {
-      x: wndw.innerWidth/2,
-      y: wndw.innerHeight/2
-    }
 
-    const mouseEvent = (type,me) => {
+    const mouseEvent = (type, me) => {
       if(type === Event.MOUSE_DOWN && !me.button) mouseDown = true;
       else if(type === Event.MOUSE_UP && !me.button) mouseDown = false;
       return {
-        pos: {x: me.clientX - center.x, y: me.clientY - center.y},
-        vel: {x: me.movementX, y: me.movementY},
+        pos: {x: me.clientX * this.scl.x, y: me.clientY * this.scl.y},
+        vel: {x: me.movementX * this.scl.x, y: me.movementY * this.scl.y},
         down: mouseDown,
         which: me.button
       }
