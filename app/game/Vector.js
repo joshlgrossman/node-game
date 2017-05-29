@@ -48,6 +48,11 @@ class Vector {
     return new Vector(this.x - that.x, this.y - that.y);
   }
 
+  multiply(x,y){
+    const that = typeof x === 'object' ? x : new Vector(x,y);
+    return this.x * that.x + this.y * that.y;
+  }
+
   scale(k){
     return new Vector(k * this.x, k * this.y);
   }
