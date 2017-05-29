@@ -1,6 +1,7 @@
 const v = require('./Vector').factory;
 const Puppet = require('./Puppet');
 const Listenable = require('./Listenable');
+const Bullet = require('./Bullet');
 
 class Player extends Listenable(Puppet) {
 
@@ -11,7 +12,10 @@ class Player extends Listenable(Puppet) {
     this.previousMouse = {};
   }
 
-  shoot(){}
+  shoot(){
+    const bullet = new Bullet(this);
+    this.engine && this.engine.add(bullet);
+  }
 
   update(delta){
     if(this.keys[65]){
