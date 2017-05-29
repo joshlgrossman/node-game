@@ -4,7 +4,9 @@
   "description": "",
   "main": "app/server/server.js",
   "scripts": {
-    "start": "node app/server/server"
+    "start": "node app/server/server",
+    "debug": "node --inspect app/server/server",
+    "build": "grunt"
   },
   "keywords": [],
   "author": "Josh",
