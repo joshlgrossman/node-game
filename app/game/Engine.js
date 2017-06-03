@@ -4,19 +4,17 @@ const Bullet = require('./Bullet');
 class Engine {
 
   constructor(canvas){
-    this.trace = (...data) => data.forEach(console.log);
     this.canvas = canvas;
-    this.gfx = canvas && this.canvas.getContext('2d');
+    this.gfx = canvas && canvas.getContext('2d');
     this.objects = [];
     this.time = new Date().getTime();
-    this.delta = 0;
   }
 
   update(){
     const time = new Date().getTime();
-    this.delta = (time - this.time)/1000;
+    const delta = (time - this.time)/1000;
     this.time = time;
-    for(const id in this.objects) this.objects[id].update(this.delta);
+    for(const id in this.objects) this.objects[id].update(delta);
   }
 
   render(){
