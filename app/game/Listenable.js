@@ -11,7 +11,7 @@ const Listenable = Base => class extends Base {
 
   listen(io){
     io.listeners.push(this);
-    return io;
+    return this;
   }
 
   remove(){}

@@ -19,8 +19,7 @@ module.exports = function(socket){
   function connect(){
     const player = new Player(socket.id);
     const input = new Input(window,scale);
-    player.listen(input).route(socket);
-    engine.add(player)
+    engine.add(player.listen(input.route(socket)));
   }
 
   function update(state){

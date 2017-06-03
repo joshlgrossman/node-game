@@ -10,8 +10,7 @@ module.exports = function(io){
   function connect(sckt){
     const player = new Player(sckt.id);
     const socket = new Socket(sckt);
-    player.listen(socket);
-    engine.add(player);
+    engine.add(player.listen(socket));
   }
 
   function update(){
