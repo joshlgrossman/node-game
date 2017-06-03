@@ -73,11 +73,6 @@ class Engine {
     return state;
   }
 
-  refresh(){
-    for(const id in this.objects) this.objects[id].stale = false;
-    return this;
-  }
-
 }
 
 module.exports = Engine;
