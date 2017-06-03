@@ -2,13 +2,16 @@ const Entity = require('./Entity');
 
 class Puppet extends Entity {
 
+  static get MAX_HP(){ return 100; }
+  static get TYPE(){ return 'player'; }
+
   static randomColor(){
-    const angle1 = Math.random() * 6.2832;
-    const angle2 = angle1 + 1.0472;
+    const angle1 = Math.random() * 6.2832;  // 2pi
+    const angle2 = angle1 + 1.0472; // pi/3
     const sin1 = Math.sin(angle1);
-    const r = (Math.cos(angle1) * 100)|0 + 155;
-    const g = (sin1 * Math.cos(angle2) * 100)|0 + 155;
-    const b = (sin1 * Math.sin(angle2) * 100)|0 + 155;
+    const r = ((Math.cos(angle1) * 100)|0) + 155;
+    const g = ((sin1 * Math.cos(angle2) * 100)|0) + 155;
+    const b = ((sin1 * Math.sin(angle2) * 100)|0) + 155;
     return {
       light: `rgb(${r},${g},${b})`,
       dark: `rgb(${r>>1},${g>>1},${b>>1})`
@@ -16,10 +19,11 @@ class Puppet extends Entity {
   }
 
   constructor(id){
-    super('player');
+    super(Puppet.TYPE);
     this.id = id;
     this.color = Puppet.randomColor();
     this.radius = 15;
+    this.hp = Puppet.MAX_HP;
   }
 
   render(gfx){
@@ -40,6 +44,12 @@ class Puppet extends Entity {
     gfx.stroke();
     gfx.fill();
   }
+
+  hit(dmg){
+    if((this.hp -= dmg) <= 0) this.die();
+  }
+
+  die(){}
 
 }
 

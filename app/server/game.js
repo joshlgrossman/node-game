@@ -16,10 +16,7 @@ module.exports = function(io){
 
   function update(){
     const state = engine.serialize();
-    if(state){
-      io.emit(Event.UPDATE, state);
-      engine.refresh();
-    }
+    if(state) io.emit(Event.UPDATE, state);
   }
 
   function run(){

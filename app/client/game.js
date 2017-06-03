@@ -25,7 +25,6 @@ module.exports = function(socket){
 
   function update(state){
     engine.merge(state);
-    engine.refresh();
   }
 
   function run(){

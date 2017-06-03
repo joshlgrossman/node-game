@@ -1,4 +1,5 @@
 const Puppet = require('./Puppet');
+const Bullet = require('./Bullet');
 
 class Engine {
 
@@ -43,26 +44,35 @@ class Engine {
 
   merge(state){
     for(const id in state) {
+      const stateObj = state[id];
       if(id in this.objects){
-        this.objects[id].merge(state[id]);
+        this.objects[id].merge(stateObj);
       } else {
-        const puppet = new Puppet(id);
-        this.add(puppet);
+        let obj;
+        switch(stateObj.type){
+          case Puppet.TYPE:
+            obj = new Puppet(id);
+            break;
+          case Bullet.TYPE:
+            obj = new Bullet(this.objects[stateObj.from]);
+            break;
+        }
+        obj.merge(stateObj);
+        this.add(obj);
       }
     }
     return this;
   }
 
   serialize(){
-    const state = {};
-    let stale = false;
+    let state = null;
     for(const id in this.objects) {
       if(this.objects[id].stale){
-        stale = true;
+        if(!state) state = {};
         state[id] = this.objects[id].serialize();
       }
     }
-    return stale ? state : null;
+    return state;
   }
 
   refresh(){

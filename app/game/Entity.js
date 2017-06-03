@@ -10,6 +10,7 @@ class Entity {
     this.rot = 0;
     this.friction = 250;
     this.type = type;
+    this.stale = true;
   }
 
   remove(){
@@ -21,14 +22,18 @@ class Entity {
     this.pos = this.pos.avg(0.75, entity.pos);
     this.vel = this.vel.avg(0.75, entity.vel);
     this.rot = entity.rot;
+    this.type = entity.type;
+    this.stale = false;
   }
 
   serialize(){
+    this.stale = false;
     return {
       pos: this.pos.serialize(),
       vel: this.vel.serialize(),
-      rot: this.rot
-    }
+      rot: this.rot,
+      type: this.type
+    };
   }
 
   move(delta){
