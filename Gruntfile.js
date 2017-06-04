@@ -9,7 +9,7 @@ module.exports = function(grunt) {
         reset: true
       },
 
-      build: ['app/client/*.js', 'app/game/*.js', 'app/server/**/*.js']
+      build: ['app/client/*.js', 'app/game/*.js', 'app/server/*.js']
     },
 
     browserify: {
