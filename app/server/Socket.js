@@ -1,5 +1,5 @@
-const IO = require('../game/IO');
-const Event = require('../game/Event');
+const IO = require('../engine/IO');
+const Event = require('../engine/Event');
 
 class Socket extends IO {
 

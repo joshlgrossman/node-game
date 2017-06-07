@@ -1,6 +1,6 @@
-const Engine = require('../game/Engine');
-const Player = require('../game/Player');
-const Event = require('../game/Event');
+const Engine = require('../engine/Engine');
+const Player = require('../engine/Player');
+const Event = require('../engine/Event');
 const Socket = require('./Socket');
 
 module.exports = function(io){
