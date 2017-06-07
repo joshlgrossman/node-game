@@ -40,7 +40,7 @@ class Entity {
     this.pos = this.pos.add(this.vel.scale(delta));
     if(this.vel.lengthSq > 0){
       const vel = this.vel.length - this.friction * delta;
-      this.vel.length = vel < 0 ? 0 : vel;
+      this.vel.length = Math.max(vel, 0);
     }
   }
 

@@ -14,8 +14,6 @@ const Listenable = Base => class extends Base {
     return this;
   }
 
-  remove(){}
-
   on(evt, data){
     if(evt === Event.MOUSE) this.mouse = data;
     else if(evt === Event.KEY) this.keys[data.which] = data.down;

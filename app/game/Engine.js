@@ -7,6 +7,7 @@ class Engine {
     this.canvas = canvas;
     this.gfx = canvas && canvas.getContext('2d');
     this.objects = [];
+    this.removed = [];
     this.time = new Date().getTime();
   }
 
@@ -22,21 +23,20 @@ class Engine {
     for(const id in this.objects) this.objects[id].render(this.gfx);
   }
 
-  add(...objs){
-    objs.forEach(obj => {
-      if(obj.id) this.objects[obj.id] = obj;
-      else this.objects.push(obj);
-      obj.engine = this;
-    });
-    return this;
+  add(obj){
+    if(obj.id) this.objects[obj.id] = obj;
+    else this.objects.push(obj);
+    return obj.engine = this;
   }
 
-  remove(...objs){
-    objs.forEach(obj => {
-      if(obj.id) delete this.objects[obj.id];
-      else this.objects.splice(this.objects.indexOf(obj), 1);
-      obj.engine = null;
-    });
+  remove(obj){
+    if(obj.id){
+      delete this.objects[obj.id];
+      this.removed[obj.id] = obj;
+    } else {
+      this.objects.splice(this.objects.indexOf(obj), 1);
+      this.removed.push(obj);
+    }
     return this;
   }
 
@@ -44,7 +44,10 @@ class Engine {
     for(const id in state) {
       const stateObj = state[id];
       if(id in this.objects){
-        this.objects[id].merge(stateObj);
+        if(stateObj)
+          this.objects[id].merge(stateObj);
+        else
+          this.objects[id].remove();
       } else {
         let obj;
         switch(stateObj.type){
@@ -64,12 +67,17 @@ class Engine {
 
   serialize(){
     let state = null;
-    for(const id in this.objects) {
+    for(const id in this.objects){
       if(this.objects[id].stale){
         if(!state) state = {};
         state[id] = this.objects[id].serialize();
       }
     }
+    for(const id in this.removed){
+      if(!state) state = {};
+      state[id] = false;
+    }
+    this.removed = [];
     return state;
   }
 
