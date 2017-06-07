@@ -44,10 +44,7 @@ class Engine {
     for(const id in state) {
       const stateObj = state[id];
       if(id in this.objects){
-        if(stateObj)
-          this.objects[id].merge(stateObj);
-        else
-          this.objects[id].remove();
+        this.objects[id].merge(stateObj);
       } else {
         let obj;
         switch(stateObj.type){
@@ -66,17 +63,14 @@ class Engine {
   }
 
   serialize(){
-    let state = null;
+    let state = this.removed.length && {};
     for(const id in this.objects){
       if(this.objects[id].stale){
         if(!state) state = {};
         state[id] = this.objects[id].serialize();
       }
     }
-    for(const id in this.removed){
-      if(!state) state = {};
-      state[id] = false;
-    }
+    for(const id in this.removed) state[id] = false;
     this.removed = [];
     return state;
   }

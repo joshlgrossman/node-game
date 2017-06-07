@@ -19,11 +19,13 @@ class Entity {
   }
 
   merge(entity){
+    if(!entity) return this.remove();
     this.pos = this.pos.avg(0.75, entity.pos);
     this.vel = this.vel.avg(0.75, entity.vel);
     this.rot = entity.rot;
     this.type = entity.type;
     this.stale = false;
+    return this;
   }
 
   serialize(){
