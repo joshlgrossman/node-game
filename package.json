@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "app/server/server.js",
+  "engines": {
+    "node": "8.x"
+  }
   "scripts": {
     "start": "node app/server/server",
     "debug": "node --inspect app/server/server",
