@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node app/server/server",
     "debug": "node --inspect app/server/server",
-    "build": "grunt"
+    "build": "node ./node_modules/grunt/bin/grunt"
   },
   "keywords": [],
   "author": "Josh",
@@ -31,7 +31,6 @@
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
-    "lodash": "^4.17.4",
     "socket.io": "^2.0.1"
   }
 }
