@@ -18,7 +18,7 @@ class Engine {
     for(const id in this.objects) this.objects[id].update(delta);
   }
 
-  collsions(){
+  collisions(){
     for(const id in this.objects) this.objects[id].collisions(this.objects);
   }
 

@@ -28,7 +28,7 @@ module.exports = function(socket){
 
   function run(){
     engine.update();
-    engine.collsions();
+    engine.collisions();
     engine.render();
     requestAnimationFrame(run);
   }

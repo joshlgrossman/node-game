@@ -20,7 +20,7 @@ module.exports = function(io){
 
   function run(){
     engine.update();
-    engine.collsions();
+    engine.collisions();
     update();
   }
 
