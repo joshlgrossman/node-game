@@ -18,16 +18,15 @@ class Player extends Listenable(Puppet) {
   }
 
   update(delta){
-    if(this.keys[65]){
+    if(this.keys[65])
       this.vel.x = -this.speed;
-    } else if(this.keys[68]){
+    else if(this.keys[68])
       this.vel.x = this.speed;
-    }
-    if(this.keys[87]){
+
+    if(this.keys[87]) 
       this.vel.y = -this.speed;
-    } else if(this.keys[83]){
+    else if(this.keys[83])
       this.vel.y = this.speed;
-    }
 
     if(this.vel.lengthSq > this.speedSq)
       this.vel.length = this.speed;
