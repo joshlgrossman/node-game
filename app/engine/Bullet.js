@@ -19,11 +19,14 @@ class Bullet extends Entity {
   }
 
   update(delta){
-    if((this.aliveTime += delta) >= Bullet.MAX_ALIVE) return this.remove();
-    else if(!this.active) return;
+    if((this.aliveTime += delta) >= Bullet.MAX_ALIVE)
+      this.remove();
+  }
 
-    for(const id in this.engine.objects){
-      const obj = this.engine.objects[id];
+  collisions(objects){
+    if(!this.active) return;
+    for(const id in objects){
+      const obj = objects[id];
       if(id !== this.from && obj.type === 'player'){
         const rel = obj.pos.sub(this.pos);
         const dotprod = rel.multiply(this.vel);
@@ -41,7 +44,6 @@ class Bullet extends Entity {
         }
       }
     }
-
   }
 
   render(gfx){

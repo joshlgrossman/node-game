@@ -1,3 +1,4 @@
+const v = require('./Vector').factory;
 const Entity = require('./Entity');
 
 class Puppet extends Entity {
@@ -43,6 +44,23 @@ class Puppet extends Entity {
     gfx.arc(this.pos.x, this.pos.y, this.radius, 0, 6.2832);
     gfx.stroke();
     gfx.fill();
+  }
+
+  collisions(objects){
+    for(const id in objects){
+      const obj = objects[id];
+      if(id !== this.id && obj.type === Puppet.TYPE){
+        let delta = this.pos.sub(obj.pos);
+        const dist = delta.length;
+        const radius = this.radius + obj.radius;
+        if(dist < radius){
+          if(dist === 0) delta = v(radius/2, 0);
+          else delta.length = (radius - dist)/2;
+          this.pos = this.pos.add(delta);
+          obj.pos = obj.pos.sub(delta);
+        }
+      }
+    }
   }
 
   hit(dmg){

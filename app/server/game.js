@@ -20,6 +20,7 @@ module.exports = function(io){
 
   function run(){
     engine.update();
+    engine.collsions();
     update();
   }
 

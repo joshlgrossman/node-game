@@ -55,6 +55,8 @@ class Entity {
     gfx.fillRect(this.pos.x - 5, this.pos.y - 5, 10, 10);
   }
 
+  collisions(objects){}
+
 }
 
 module.exports = Entity;

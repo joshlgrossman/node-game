@@ -18,6 +18,10 @@ class Engine {
     for(const id in this.objects) this.objects[id].update(delta);
   }
 
+  collsions(){
+    for(const id in this.objects) this.objects[id].collisions(this.objects);
+  }
+
   render(){
     this.gfx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     for(const id in this.objects) this.objects[id].render(this.gfx);
