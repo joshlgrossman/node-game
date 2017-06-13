@@ -24,10 +24,12 @@ class Puppet extends Entity {
     this.id = id;
     this.color = Puppet.randomColor();
     this.radius = 15;
-    this.hp = Puppet.MAX_HP;
+    this.active = false;
   }
 
   render(gfx){
+    if(!this.active) return;
+    
     const lx = Math.cos(this.rot) * (this.radius + 10);
     const ly = Math.sin(this.rot) * (this.radius + 10);
 
@@ -47,9 +49,10 @@ class Puppet extends Entity {
   }
 
   collisions(objects){
+    if(!this.active) return;
     for(const id in objects){
       const obj = objects[id];
-      if(id !== this.id && obj.type === Puppet.TYPE){
+      if(id !== this.id && obj.active && obj.type === Puppet.TYPE){
         let delta = this.pos.sub(obj.pos);
         const dist = delta.length;
         const radius = this.radius + obj.radius;
@@ -67,7 +70,28 @@ class Puppet extends Entity {
     if((this.hp -= dmg) <= 0) this.die();
   }
 
-  die(){}
+  die(){
+    this.stale = true;
+    this.active = false;
+  }
+
+  spawn(){
+    this.stale = true;
+    this.active = true;
+    this.vel = v();
+    this.hp = Puppet.MAX_HP;
+  }
+
+  merge(entity){
+    this.hp = entity.hp;
+    return Entity.prototype.merge.call(this, entity);
+  }
+
+  serialize(){
+    const result = Entity.prototype.serialize.call(this);
+    result.hp = this.hp;
+    return result;
+  }
 
 }
 

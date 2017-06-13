@@ -5,12 +5,13 @@ class Entity {
   constructor(type = 'entity'){
     this.engine = null;
     this.smoothing = 0.75;
-    this.pos = v(100,100);
-    this.vel = v(0,0);
+    this.pos = v();
+    this.vel = v();
     this.rot = 0;
     this.friction = 250;
     this.type = type;
     this.stale = true;
+    this.active = true;
   }
 
   remove(){
@@ -24,6 +25,7 @@ class Entity {
     this.vel = this.vel.avg(0.75, entity.vel);
     this.rot = entity.rot;
     this.type = entity.type;
+    this.active = entity.active;
     this.stale = false;
     return this;
   }
@@ -34,7 +36,8 @@ class Entity {
       pos: this.pos.serialize(),
       vel: this.vel.serialize(),
       rot: this.rot,
-      type: this.type
+      type: this.type,
+      active: this.active
     };
   }
 

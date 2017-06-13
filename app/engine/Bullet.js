@@ -55,9 +55,15 @@ class Bullet extends Entity {
     gfx.stroke();
   }
 
+  merge(entity){
+    this.len = v(entity.len);
+    return Entity.prototype.merge.call(this, entity);
+  }
+
   serialize(){
     const result = Entity.prototype.serialize.call(this);
     result.from = this.from;
+    result.len = this.len.serialize();
     return result;
   }
 

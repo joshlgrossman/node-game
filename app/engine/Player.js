@@ -17,13 +17,31 @@ class Player extends Listenable(Puppet) {
     this.engine && this.engine.add(bullet);
   }
 
+  render(gfx){
+    if(this.active) return Puppet.prototype.render.call(this, gfx);
+
+    gfx.fillStyle = 'rgba(255,255,255,0.5)';
+    gfx.strokeStyle = '#D55';
+    gfx.lineWidth = 3;
+    gfx.beginPath();
+    gfx.arc(this.pos.x, this.pos.y, this.radius*2, 0, 6.2832);
+    gfx.stroke();
+    gfx.fill();
+  }
+
   update(delta){
+    if(this.active) this.life(delta);
+    
+    else this.death(delta);
+  }
+
+  life(delta){
     if(this.keys[65])
       this.vel.x = -this.speed;
     else if(this.keys[68])
       this.vel.x = this.speed;
 
-    if(this.keys[87]) 
+    if(this.keys[87])
       this.vel.y = -this.speed;
     else if(this.keys[83])
       this.vel.y = this.speed;
@@ -39,6 +57,12 @@ class Player extends Listenable(Puppet) {
 
     this.stale = this.stale || (prevRot - this.rot) || this.vel.lengthSq > 0;
     this.move(delta);
+    this.previousMouse = this.mouse;
+  }
+
+  death(delta){
+    this.pos = v(this.mouse.pos);
+    if(this.mouse.down && !this.previousMouse.down) this.spawn();
     this.previousMouse = this.mouse;
   }
 
