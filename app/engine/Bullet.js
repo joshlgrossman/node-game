@@ -27,7 +27,7 @@ class Bullet extends Entity {
     if(!this.active) return;
     for(const id in objects){
       const obj = objects[id];
-      if(id !== this.from && obj.type === 'player'){
+      if(id !== this.from && obj.active && obj.type === 'player'){
         const rel = obj.pos.sub(this.pos);
         const dotprod = rel.multiply(this.vel);
         const proj = this.vel.scale(dotprod);

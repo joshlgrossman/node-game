@@ -76,6 +76,7 @@ class Puppet extends Entity {
   }
 
   die(){
+    this.score--;
     this.stale = true;
     this.active = false;
   }
@@ -89,6 +90,7 @@ class Puppet extends Entity {
 
   merge(entity){
     this.hp = entity.hp;
+    if(this.active && !entity.active) this.score--;
     return Entity.prototype.merge.call(this, entity);
   }
 
