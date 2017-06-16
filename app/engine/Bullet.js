@@ -36,7 +36,10 @@ class Bullet extends Entity {
         if(diff < obj.radius**2){
           const angle = Math.acos(dotprod / rel.length);
           if(angle < 1.57){ // pi/2
-            obj.hit(10);
+            if(obj.hit(10)){
+              const from = objects[this.from];
+              if(from) from.score++;
+            }
             this.len = proj;
             this.active = false;
             break;

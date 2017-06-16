@@ -25,11 +25,12 @@ class Puppet extends Entity {
     this.color = Puppet.randomColor();
     this.radius = 15;
     this.active = false;
+    this.score = 0;
   }
 
   render(gfx){
     if(!this.active) return;
-    
+
     const lx = Math.cos(this.rot) * (this.radius + 10);
     const ly = Math.sin(this.rot) * (this.radius + 10);
 
@@ -67,7 +68,11 @@ class Puppet extends Entity {
   }
 
   hit(dmg){
-    if((this.hp -= dmg) <= 0) this.die();
+    if((this.hp -= dmg) <= 0) {
+      this.die();
+      return true;
+    }
+    return false;
   }
 
   die(){

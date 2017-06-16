@@ -18,6 +18,10 @@ class Player extends Listenable(Puppet) {
   }
 
   render(gfx){
+    gfx.fillStyle = 'black';
+    gfx.font = '16px sans-serif';
+    gfx.fillText(`Score ${this.score}`, 16, 16);
+
     if(this.active) return Puppet.prototype.render.call(this, gfx);
 
     gfx.fillStyle = 'rgba(255,255,255,0.5)';
@@ -31,7 +35,7 @@ class Player extends Listenable(Puppet) {
 
   update(delta){
     if(this.active) this.life(delta);
-    
+
     else this.death(delta);
   }
 
